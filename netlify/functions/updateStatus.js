@@ -22,7 +22,7 @@ export async function handler(event) {
       : 'Sorry, your appointment has been rejected.';
 
   await resend.emails.send({
-    from: 'noreply@yourdomain.com',
+    from: 'testmydomain@resend.dev',
     to: email,
     subject,
     html: `<p>${message}</p>`,
@@ -33,3 +33,4 @@ export async function handler(event) {
     body: JSON.stringify({ success: true }),
   };
 }
+
