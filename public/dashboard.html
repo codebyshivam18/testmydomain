@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+</head>
+<body>
+  <h2>Admin Dashboard</h2>
+  <input type="password" id="password" placeholder="Enter Password">
+  <button id="login">Login</button>
+
+  <div id="panel" style="display:none;">
+    <input type="email" id="email" placeholder="User Email">
+    <button onclick="updateStatus('approved')">Approve</button>
+    <button onclick="updateStatus('rejected')">Reject</button>
+  </div>
+
+  <script>
+    let adminPass = '';
+
+    document.getElementById('login').onclick = () => {
+      const pass = document.getElementById('password').value;
+      if (!pass) return alert('Enter password');
+      adminPass = pass;
+      document.getElementById('panel').style.display = 'block';
+    };
+
+    async function updateStatus(status) {
+      const email = document.getElementById('email').value;
+      const res = await fetch('/.netlify/functions/updateStatus', {
+        method: 'POST',
+        body: JSON.stringify({ password: adminPass, email, status })
+      });
+      const result = await res.json();
+      alert(status === 'approved' ? 'Approved!' : 'Rejected!');
+    }
+  </script>
+</body>
+</html>
