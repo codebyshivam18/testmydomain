@@ -13,7 +13,7 @@ export async function handler(event) {
 
   // Send confirmation mail to user
   await resend.emails.send({
-    from: 'noreply@yourdomain.com',
+    from: 'testmydomain@resend.dev',
     to: email,
     subject: 'Appointment Received',
     html: `<p>Hi ${name}, your appointment request has been received!</p>`,
@@ -24,3 +24,4 @@ export async function handler(event) {
     body: JSON.stringify({ success: true, message: 'Appointment submitted!' }),
   };
 }
+
